@@ -42,8 +42,12 @@ router.post('/new', function(request, response, next) {
 // GET /posts/:id
 // show post
 router.get('/:id', function(request, response, next) {
+  //TODO: DRY this code
   models.posts.findById(request.params.id, {
-    include: [models.comments]
+    include: [models.comments, models.tags],
+    order: [
+    [{model: models.comments} ,"createdAt", "DESC"]
+    ]
   })
   .then(function(post) {
     response.render('post', { post: post });

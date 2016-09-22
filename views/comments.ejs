@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script   src="https://code.jquery.com/jquery-3.1.0.slim.js"   integrity="sha256-L6ppAjL6jgtRmfiuigeEE5AwNI2pH/X9IBbPyanJeZw="   crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body class="container">
+    <!-- http://getbootstrap.com/components/#navbar -->
+    <nav class="navbar navbar-primary">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          Really Cool Blog
+        </div>
+      </div>
+    </nav>
+    <div class="row">
+      <div class="col-md-8">
+        <form id="search_form" action="/posts" method="get">
+          <input
+            type="text"
+            name="title"
+            class="form-control"
+            placeholder="Search Post by Title" />
+        </form>
+      </div>
+      <div class="col-md-4">
+        <a
+          href="/posts/new"
+          class="btn btn-primary btn-md">Create a Post</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Comments</h1>
+        <table class="table">
+          <tbody>
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>Related to Post #</td>
+                <td>Post Title</td>
+                <td>Author</td>
+                <td>Content</td>
+                <td>Date</td>
+
+              </tr>
+            </thead id="comments_table">
+            <% comments.forEach(function(comment) { %>
+              <tr>
+                <td><%= comment.id %></td>
+                <td><%= comment.postId %></td>
+                <td><%= comment.post.title %></td>s
+                <% if(comment.userId === "NULL") { %> <td> Author's name not available </td> <% } else if (comment.userId > 0) { %> <td><%= comment.user.firstName %> <%= comment.user.lastName %></td> <% } %>
+                <td><%= comment.content %></td>
+                <td><%= comment .createdAt %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
+
