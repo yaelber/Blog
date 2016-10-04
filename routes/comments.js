@@ -12,13 +12,15 @@ router.get('/', function(request, response, next) {
     });
 });
 
-// DELETE /comments/:id
+
+
 router.delete('/:id', function(request, response, next) {
   // created a flag called `postId` that will capture the comment's post ID
   // once models.comments.findById promise is fulfilled.
   var postId;
   models.comments.findById(request.params.id)
     .then(function commentFindSuccess(comment){
+
       postId = comment.postId;
       return comment.destroy(); // this is also a promise! Chain it.
     }, function commentFindFailed(error) {
@@ -26,6 +28,7 @@ router.delete('/:id', function(request, response, next) {
     })
     // now this is handling the promise of the destroy
     .then(function destroySucceeded() {
+
       // assume DELETE comes from the show post page
       // TODO: DRY this code. It is repeated in posts.js
       return models.posts.findById(postId, {

@@ -41,6 +41,7 @@
                 <td>ID</td>
                 <td>Author</td>
                 <td>Title</td>
+                <td>Tags</td>
                 <td>Body</td>
                 <td>Date</td>
 
@@ -52,6 +53,11 @@
                 <td><%= post.user.firstName %> <%= post.user.lastName %></td>
                 <td>
                   <a href="/posts/<%= post.id %>"><%= post.title %></a>
+                </td>
+                <td>
+                  <% post.tags.forEach(function(tag) { %>
+                    <a href="/tags/<%= tag.id %>"><%= tag.title %></a>
+                  <% }); %>
                 </td>
                 <td><%= post.body %></td>
                 <td><%= post.createdAt %></td>
