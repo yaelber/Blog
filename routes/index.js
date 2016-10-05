@@ -8,4 +8,10 @@ router.get('/', function(request, response, next) {
   response.redirect('/posts');
 });
 
+router.get('/hello-world-react', (request, response, next) => {
+  // res.render('index', { title: 'Express' });
+  response.render('hello-world-react', {
+    title: 'Hello React!'
+  });
+});
 module.exports = router;
